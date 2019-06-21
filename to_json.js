@@ -2,21 +2,20 @@ const fs = require("fs");
 
 const getStartPoints = function(firstLine) {
   let headers = firstLine.split(" ");
-  let count = 0;
   let startPoints = [0];
 
-  for (let index = 0; index < headers.length; index++) {
-    let header = headers[index];
-    if (header == "") {
-      count++;
+  headers.reduce(function(acc, currentElement, index) {
+    if (currentElement == "") {
+      acc++;
       if (headers[index + 1] != "") {
-        count++;
-        startPoints.push(count);
+        acc++;
+        startPoints.push(acc);
       }
     } else {
-      count += header.length;
+      acc += currentElement.length;
     }
-  }
+    return acc;
+  }, 0);
   return startPoints;
 };
 
