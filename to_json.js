@@ -22,17 +22,18 @@ const getStartPoints = function(firstLine) {
 const formatDataInArray = function(data, startPoints) {
   let headers = data[0].split(" ").filter(element => element);
   headers.pop();
-  let obj = {};
   let finalResult = [];
+  data = data.slice(1, data.length - 1);
 
-  for (let dataIndex = 1; dataIndex < data.length - 1; dataIndex++) {
-    for (let headerIndex = 0; headerIndex < headers.length; headerIndex++) {
-      obj[headers[headerIndex]] = data[dataIndex]
-        .substring(startPoints[headerIndex], startPoints[headerIndex + 1])
+  data.forEach(line => {
+    let obj = headers.reduce(function(acc, currentElement, index) {
+      acc[currentElement] = line
+        .substring(startPoints[index], startPoints[index + 1])
         .trim();
-    }
+      return acc;
+    }, {});
     finalResult.push(obj);
-  }
+  });
   return finalResult;
 };
 
