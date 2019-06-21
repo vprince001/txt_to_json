@@ -1,0 +1,24 @@
+{
+  "name": "txt_to_json_convertor",
+  "version": "1.0.0",
+  "description": "exports a json file from txt table file",
+  "main": "txt_to_json.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vprince001/txt_to_json_convertor.git"
+  },
+  "keywords": [
+    "txt",
+    "to",
+    "json"
+  ],
+  "author": "Prince Verma",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vprince001/txt_to_json_convertor/issues"
+  },
+  "homepage": "https://github.com/vprince001/txt_to_json_convertor#readme"
+}

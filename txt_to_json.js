@@ -1,5 +1,4 @@
 const fs = require("fs");
-const file = process.argv[2];
 
 const getStartPoints = function(firstLine) {
   let headers = firstLine.split(" ");
@@ -38,11 +37,11 @@ const formatDataInArray = function(data, startPoints) {
   return finalResult;
 };
 
-const main = function() {
-  const data = fs.readFileSync(file, "utf8").split("\n");
+const convert_txt_to_json = function(filePath) {
+  const data = fs.readFileSync(filePath, "utf8").split("\n");
   const startPoints = getStartPoints(data[0]);
   const finalResult = formatDataInArray(data, startPoints);
-  fs.writeFileSync("./output.json", JSON.stringify(finalResult));
+  return finalResult;
 };
 
-main();
+module.exports = convert_txt_to_json;
