@@ -37,11 +37,11 @@ const formatDataInArray = function(data, startPoints) {
   return finalResult;
 };
 
-const convert_txt_to_json = function(filePath) {
+const txtToJson = function(filePath) {
   const data = fs.readFileSync(filePath, "utf8").split("\n");
   const startPoints = getStartPoints(data[0]);
   const finalResult = formatDataInArray(data, startPoints);
   return finalResult;
 };
 
-module.exports = convert_txt_to_json;
+module.exports = txtToJson;

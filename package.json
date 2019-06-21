@@ -1,24 +1,31 @@
 {
-  "name": "txt_to_json_convertor",
+  "name": "txtToJson",
   "version": "1.0.0",
-  "description": "exports a json file from txt table file",
+  "description": "Reads a txt file having a table and returns an array of obects. In which each object consists of all headers as keys and there data as values.",
   "main": "txt_to_json.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vprince001/txt_to_json_convertor.git"
+    "url": "git+https://github.com/vprince001/txt_to_json.git"
   },
   "keywords": [
+    "txttojson",
+    "text to json",
+    "json",
     "txt",
-    "to",
-    "json"
+    "text",
+    "convert",
+    "array",
+    "txt-to-json",
+    "text-to-json",
+    "txtToJson"
   ],
   "author": "Prince Verma",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/vprince001/txt_to_json_convertor/issues"
+    "url": "https://github.com/vprince001/txt_to_json/issues"
   },
-  "homepage": "https://github.com/vprince001/txt_to_json_convertor#readme"
+  "homepage": "https://github.com/vprince001/txt_to_json#readme"
 }
