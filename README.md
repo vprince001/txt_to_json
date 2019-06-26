@@ -1,4 +1,4 @@
-<h1 align="center">txtToJson</h1>
+<h1 align="center">txt-file-to-json</h1>
 
 <div align="center">
 
@@ -8,7 +8,7 @@ Reads a txt file having a table and returns an array of obects. In which each ob
 
 ## Installation
 
-```sh
+```
 npm i --save txt-file-to-json
 ```
 
@@ -23,7 +23,7 @@ const txtToJson = require("txt-file-to-json");
 const dataInJSON = txtToJson("./filePath.txt");
 ```
 
-#### Sample txt file data :
+#### Sample input (txt data) :
 
 ```
 FIRST_NAME     LAST_NAME        NUMBER               EMAIL                        ADDRESS
@@ -34,7 +34,7 @@ Daryl          Spence           990015XXXX           NULL                       
 Charolette     Rice             720012XXXX           charolette.rice@msn.com      107 ~ River Dr. `Sacramento`, "CA"      95820
 ```
 
-#### Sample json data :
+#### Sample output (json data) :
 
 ```
 [

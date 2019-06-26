@@ -1,27 +1,46 @@
 const fs = require("fs");
+const { CR, NL, WS, ES, FORMAT } = require("./constants.js");
 
-const getStartPoints = function(firstLine) {
-  let headers = firstLine.split(" ");
-  let startPoints = [0];
+const getHeadersAndStartPoints = function(data) {
+  const line = data[0].split(ES);
+  const startPoints = [0];
+  const headers = [];
+  let header = ES;
 
-  headers.reduce(function(acc, currentElement, index) {
-    if (currentElement == "") {
-      acc++;
-      if (headers[index + 1] != "") {
-        acc++;
-        startPoints.push(acc);
-      }
-    } else {
-      acc += currentElement.length;
+  line.forEach((char, index) => {
+    const charIsSpace = char == WS;
+    const nextCharIsNotSpace = line[index + 1] != WS;
+    const charIsNotSpace = char != WS;
+    const charIsNotCR = char != CR;
+    const charIsCR = char == CR;
+    const previousCharIsNOtSpace = line[index - 1] != WS;
+
+    if (charIsNotSpace && charIsNotCR) {
+      return (header += char);
     }
-    return acc;
-  }, 0);
-  return startPoints;
+    if (charIsSpace && nextCharIsNotSpace) {
+      startPoints.push(index + 1);
+      headers.push(header);
+      return (header = ES);
+    }
+    if (charIsCR && previousCharIsNOtSpace) {
+      headers.push(header);
+      header = ES;
+    }
+  });
+  startPoints.push(addEndPoint(data));
+  return { headers, startPoints };
 };
 
-const formatDataInArray = function(data, startPoints) {
-  let headers = data[0].split(" ").filter(element => element);
-  headers.pop();
+const addEndPoint = function(data) {
+  const lengths = [];
+  data.forEach(line => {
+    lengths.push(line.length);
+  });
+  return Math.max(...lengths);
+};
+
+const formatDataInArray = function(data, startPoints, headers) {
   let finalResult = [];
   data = data.slice(1);
 
@@ -38,9 +57,9 @@ const formatDataInArray = function(data, startPoints) {
 };
 
 const txtToJson = function(filePath) {
-  const data = fs.readFileSync(filePath, "utf8").split("\n");
-  const startPoints = getStartPoints(data[0]);
-  const finalResult = formatDataInArray(data, startPoints);
+  const data = fs.readFileSync(filePath, FORMAT).split(NL);
+  const { headers, startPoints } = getHeadersAndStartPoints(data);
+  const finalResult = formatDataInArray(data, startPoints, headers);
   return finalResult;
 };
 
