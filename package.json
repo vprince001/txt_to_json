@@ -4,7 +4,7 @@
   "description": "Reads a txt file having a table and returns an array of obects. In which each object consists of all headers as keys and there data as values.",
   "main": "txt_to_json.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "nyc --reporter=text mocha"
   },
   "repository": {
     "type": "git",
@@ -27,5 +27,9 @@
   "bugs": {
     "url": "https://github.com/vprince001/txt_to_json/issues"
   },
-  "homepage": "https://github.com/vprince001/txt_to_json#readme"
+  "homepage": "https://github.com/vprince001/txt_to_json#readme",
+  "dependencies": {
+    "mocha": "^6.1.4",
+    "nyc": "^14.1.1"
+  }
 }
