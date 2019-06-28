@@ -1,35 +1,31 @@
 const fs = require("fs");
-const { CR, NL, WS, ES, FORMAT } = require("./constants.js");
-const { addEndPoint, getObject } = require("./lib.js");
+const { NL, WS, ES, FORMAT } = require("./src/constants");
+const {
+  addEndPoint,
+  getObject,
+  addCharToHeader,
+  pushHeaderInHeaders
+} = require("./src/lib");
 
 const getHeadersAndStartPoints = function(data) {
   const line = data[0].split(ES);
-  const startPoints = [0];
-  const headers = [];
+  let startPoints = [0];
+  let headers = [];
   let header = ES;
 
   line.forEach((char, index) => {
-    const isNotSpace = char != WS;
-    const isNotCR = char != CR;
     const isSpace = char == WS;
     const nextIsNotSpace = line[index + 1] != WS;
-    const isCR = char == CR;
-    const isPreviousNOtSpace = line[index - 1] != WS;
 
-    if (isNotSpace && isNotCR) {
-      return (header += char);
-    }
-
+    header = addCharToHeader(char, header);
     if (isSpace && nextIsNotSpace) {
       startPoints.push(index + 1);
       headers.push(header);
       return (header = ES);
     }
-
-    if (isCR && isPreviousNOtSpace) {
-      headers.push(header);
-      header = ES;
-    }
+    const head = pushHeaderInHeaders(char, line, index, headers, header);
+    headers = head.headers;
+    header = head.header;
   });
   startPoints.push(addEndPoint(data));
   return { headers, startPoints };
