@@ -1,6 +1,6 @@
 const fs = require("fs");
 const { CR, NL, WS, ES, FORMAT } = require("./constants.js");
-const { addEndPoint, getTrimmedValue, getObject } = require("./lib.js");
+const { addEndPoint, getObject } = require("./lib.js");
 
 const getHeadersAndStartPoints = function(data) {
   const line = data[0].split(ES);
@@ -9,22 +9,24 @@ const getHeadersAndStartPoints = function(data) {
   let header = ES;
 
   line.forEach((char, index) => {
-    const charIsSpace = char == WS;
-    const nextCharIsNotSpace = line[index + 1] != WS;
-    const charIsNotSpace = char != WS;
-    const charIsNotCR = char != CR;
-    const charIsCR = char == CR;
-    const previousCharIsNOtSpace = line[index - 1] != WS;
+    const isNotSpace = char != WS;
+    const isNotCR = char != CR;
+    const isSpace = char == WS;
+    const nextIsNotSpace = line[index + 1] != WS;
+    const isCR = char == CR;
+    const isPreviousNOtSpace = line[index - 1] != WS;
 
-    if (charIsNotSpace && charIsNotCR) {
+    if (isNotSpace && isNotCR) {
       return (header += char);
     }
-    if (charIsSpace && nextCharIsNotSpace) {
+
+    if (isSpace && nextIsNotSpace) {
       startPoints.push(index + 1);
       headers.push(header);
       return (header = ES);
     }
-    if (charIsCR && previousCharIsNOtSpace) {
+
+    if (isCR && isPreviousNOtSpace) {
       headers.push(header);
       header = ES;
     }
@@ -51,11 +53,3 @@ const txtToJson = function(filePath) {
 };
 
 module.exports = txtToJson;
-
-// module.exports = {
-//   txtToJson,
-//   addEndPoint,
-//   formatDataInArray,
-//   getTrimmedValue,
-//   getObject
-// };
