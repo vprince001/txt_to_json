@@ -1,67 +1,75 @@
 const { equal, deepEqual } = require("assert");
+
+const {
+  WS,
+  ES,
+  CR,
+  SPLITTED_DATA,
+  LINE1,
+  LINE2,
+  START_POINTS,
+  HEADERS,
+  SPLITTED_HEADERS_LINE,
+  OBJ_FOR_LINE_1,
+  OBJ_FOR_LINE_2
+} = require("./constants_for_test");
+
 const {
   addEndPoint,
   getTrimmedValue,
   getObject,
   addCharToHeader,
-  pushHeaderInHeaders
+  pushHeaderInHeaders,
+  formatDataInArray
 } = require("../src/lib");
-
-const data = ["one", "two", "three", "four", "five", "six"];
-const inputHeaders = ["Name", "EmployeeId", "Phone", "Salary"];
-const headerLine = "Name       EmployeeId    Phone              Salary";
-const line1 = "Sam        22543         88098654XX         25000\r";
-const line2 = "Catherine  22123         NULL               3000\r";
-const startPoints = [0, 11, 25, 44, 50];
 
 describe("addEndPoint", function() {
   it("should return max length from array of strings", function() {
-    equal(addEndPoint(data), 5);
+    equal(addEndPoint(SPLITTED_DATA), 123);
   });
 });
 
 describe("getTrimmedValue", function() {
   it("should return first value from line after trimming", function() {
-    equal(getTrimmedValue(line1, startPoints, 0), "Sam");
+    equal(getTrimmedValue(LINE1, START_POINTS, 0), "Debra");
   });
 
   it("should return second value from line after trimming", function() {
-    equal(getTrimmedValue(line2, startPoints, 1), "22123");
+    equal(getTrimmedValue(LINE2, START_POINTS, 1), "Todd");
   });
 
   it("should return third value from line after trimming", function() {
-    equal(getTrimmedValue(line1, startPoints, 2), "88098654XX");
+    equal(getTrimmedValue(LINE1, START_POINTS, 2), "880012XXXX");
   });
 
   it("should return fourth value from line after trimming", function() {
-    equal(getTrimmedValue(line2, startPoints, 3), "3000");
+    equal(getTrimmedValue(LINE2, START_POINTS, 3), "kasha.todd@yahoo.com");
   });
 });
 
 describe("getObject", function() {
   const expectedOutputForLine1 = {
-    Name: "Sam",
-    EmployeeId: "22543",
-    Phone: "88098654XX",
-    Salary: "25000"
+    FIRST_NAME: "Debra",
+    LAST_NAME: "Burks",
+    NUMBER: "880012XXXX",
+    EMAIL: "debra.burks@yahoo.com",
+    ADDRESS: "9273 Thome Ave., Orchard Park, NY - 14127"
   };
+
   const expectedOutputForLine2 = {
-    Name: "Catherine",
-    EmployeeId: "22123",
-    Phone: "NULL",
-    Salary: "3000"
+    FIRST_NAME: "Kasha",
+    LAST_NAME: "Todd",
+    NUMBER: "NULL",
+    EMAIL: "kasha.todd@yahoo.com",
+    ADDRESS: "910, Vine Street, Campbell, CA - 95008"
   };
+
   it("should return an object of headers and values given headers and a string of values", function() {
-    deepEqual(
-      getObject(line1, inputHeaders, startPoints),
-      expectedOutputForLine1
-    );
+    deepEqual(getObject(LINE1, HEADERS, START_POINTS), expectedOutputForLine1);
   });
+
   it("should return an object of headers and values given headers and a string of different values", function() {
-    deepEqual(
-      getObject(line2, inputHeaders, startPoints),
-      expectedOutputForLine2
-    );
+    deepEqual(getObject(LINE2, HEADERS, START_POINTS), expectedOutputForLine2);
   });
 });
 
@@ -70,50 +78,64 @@ describe("addCharToHeader", function() {
     equal(addCharToHeader("o", "hell"), "hello");
   });
   it("should not add character to header if character is WS and return that header", function() {
-    equal(addCharToHeader(" ", "hell"), "hell");
+    equal(addCharToHeader(WS, "hell"), "hell");
   });
   it("should not add character to header if character is CR and return that header", function() {
-    equal(addCharToHeader("\r", "hell"), "hell");
+    equal(addCharToHeader(CR, "hell"), "hell");
   });
 });
 
 describe("pushHeaderInHeaders", function() {
   it("should add header in headers if character is CR and previous is not WS and return headers and empty header", function() {
-    const inputHeaders = ["Name", "EmployeeId", "Phone", "Salary"];
-    const headers1 = ["Name", "EmployeeId", "Phone", "Salary", "Email"];
-    const expectedOutput1 = {
-      header: "",
-      headers: headers1
+    let expectedHeaders = HEADERS.slice();
+    expectedHeaders.push("Salary");
+
+    const expectedOutput = {
+      header: ES,
+      headers: expectedHeaders
     };
+
     deepEqual(
-      pushHeaderInHeaders("\r", line1, 49, inputHeaders, "Email"),
-      expectedOutput1
+      pushHeaderInHeaders(
+        CR,
+        SPLITTED_HEADERS_LINE,
+        89,
+        HEADERS.slice(),
+        "Salary"
+      ),
+      expectedOutput
     );
   });
 
   it("should not add header in headers if previous character is WS and return headers and header", function() {
-    const inputHeaders = ["Name", "EmployeeId", "Phone", "Salary"];
-    const headers2 = ["Name", "EmployeeId", "Phone", "Salary"];
-    const expectedOutput2 = {
-      header: "Email",
-      headers: headers2
+    const expectedOutput = {
+      header: "Salary",
+      headers: HEADERS
     };
     deepEqual(
-      pushHeaderInHeaders("\r", line1, 42, inputHeaders, "Email"),
-      expectedOutput2
+      pushHeaderInHeaders(CR, SPLITTED_HEADERS_LINE, 80, HEADERS, "Salary"),
+      expectedOutput
     );
   });
 
   it("should not add header in headers if character is not CR and return headers and header", function() {
-    const inputHeaders = ["Name", "EmployeeId", "Phone", "Salary"];
-    const headers3 = ["Name", "EmployeeId", "Phone", "Salary"];
-    const expectedOutput3 = {
+    const expectedOutput = {
       header: "Email",
-      headers: headers3
+      headers: HEADERS
     };
     deepEqual(
-      pushHeaderInHeaders("A", line1, 49, inputHeaders, "Email"),
-      expectedOutput3
+      pushHeaderInHeaders("A", SPLITTED_HEADERS_LINE, 89, HEADERS, "Email"),
+      expectedOutput
+    );
+  });
+});
+
+describe("formatDataInArray", function() {
+  it("should return an array of objects for every line", function() {
+    const expectedOutput = [OBJ_FOR_LINE_1, OBJ_FOR_LINE_2];
+    deepEqual(
+      formatDataInArray(SPLITTED_DATA, START_POINTS, HEADERS),
+      expectedOutput
     );
   });
 });

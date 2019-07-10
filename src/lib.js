@@ -28,14 +28,30 @@ const addCharToHeader = function(char, header) {
   return header;
 };
 
-const pushHeaderInHeaders = function(char, line, index, headers, header) {
+const pushHeaderInHeaders = function(
+  char,
+  splittedHeadersLine,
+  index,
+  headers,
+  header
+) {
   const isCR = char == CR;
-  const isPreviousNOtSpace = line[index - 1] != WS;
-  if (isCR && isPreviousNOtSpace) {
+  const isPreviousNotSpace = splittedHeadersLine[index - 1] != WS;
+  if (isCR && isPreviousNotSpace) {
     headers.push(header);
     header = ES;
   }
   return { headers: headers, header: header };
+};
+
+const formatDataInArray = function(data, startPoints, headers) {
+  let finalResult = [];
+  data = data.slice(1);
+
+  data.forEach(line => {
+    finalResult.push(getObject(line, headers, startPoints));
+  });
+  return finalResult;
 };
 
 module.exports = {
@@ -43,5 +59,6 @@ module.exports = {
   getTrimmedValue,
   addEndPoint,
   addCharToHeader,
-  pushHeaderInHeaders
+  pushHeaderInHeaders,
+  formatDataInArray
 };
