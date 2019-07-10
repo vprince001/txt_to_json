@@ -9,25 +9,17 @@ const {
   LINE2,
   START_POINTS,
   HEADERS,
-  SPLITTED_HEADERS_LINE,
   OBJ_FOR_LINE_1,
   OBJ_FOR_LINE_2
 } = require("./constants_for_test");
 
 const {
-  addEndPoint,
   getTrimmedValue,
   getObject,
   addCharToHeader,
-  pushHeaderInHeaders,
+  pushHeader,
   formatDataInArray
 } = require("../src/lib");
-
-describe("addEndPoint", function() {
-  it("should return max length from array of strings", function() {
-    equal(addEndPoint(SPLITTED_DATA), 123);
-  });
-});
 
 describe("getTrimmedValue", function() {
   it("should return first value from line after trimming", function() {
@@ -85,48 +77,99 @@ describe("addCharToHeader", function() {
   });
 });
 
-describe("pushHeaderInHeaders", function() {
-  it("should add header in headers if character is CR and previous is not WS and return headers and empty header", function() {
-    let expectedHeaders = HEADERS.slice();
-    expectedHeaders.push("Salary");
+describe("pushHeader", function() {
+  it("should add header in headers for true, true, true", function() {
+    const actual = pushHeader(true, true, true, HEADERS.slice(), "SALARY");
 
+    let expectedHeaders = HEADERS.slice();
+    expectedHeaders.push("SALARY");
     const expectedOutput = {
       header: ES,
       headers: expectedHeaders
     };
 
-    deepEqual(
-      pushHeaderInHeaders(
-        CR,
-        SPLITTED_HEADERS_LINE,
-        89,
-        HEADERS.slice(),
-        "Salary"
-      ),
-      expectedOutput
-    );
+    deepEqual(actual, expectedOutput);
   });
 
-  it("should not add header in headers if previous character is WS and return headers and header", function() {
-    const expectedOutput = {
+  it("should add header in headers for true, true, false", function() {
+    const inputHeaders = ["FIRST_NAME", "LAST_NAME", "NUMBER"];
+    const actual = pushHeader(true, true, false, inputHeaders, "SALARY");
+
+    const expectedHeaders = ["FIRST_NAME", "LAST_NAME", "NUMBER", "SALARY"];
+    const expected = {
+      header: ES,
+      headers: expectedHeaders
+    };
+
+    deepEqual(actual, expected);
+  });
+
+  it("should add header in headers for true, false, true", function() {
+    const actual = pushHeader(true, false, true, HEADERS.slice(), "SALARY");
+
+    const expectedHeaders = HEADERS.slice();
+    expectedHeaders.push("SALARY");
+    const expected = {
+      header: ES,
+      headers: expectedHeaders
+    };
+
+    deepEqual(actual, expected);
+  });
+
+  it("should not add header in headers for true, false, false", function() {
+    const actual = pushHeader(true, false, false, HEADERS, "Salary");
+
+    const expected = {
       header: "Salary",
       headers: HEADERS
     };
-    deepEqual(
-      pushHeaderInHeaders(CR, SPLITTED_HEADERS_LINE, 80, HEADERS, "Salary"),
-      expectedOutput
-    );
+    deepEqual(actual, expected);
   });
 
-  it("should not add header in headers if character is not CR and return headers and header", function() {
-    const expectedOutput = {
-      header: "Email",
+  it("should not add header in headers for false, false, false", function() {
+    const actual = pushHeader(false, false, false, HEADERS, "Salary");
+
+    const expected = {
+      header: "Salary",
       headers: HEADERS
     };
-    deepEqual(
-      pushHeaderInHeaders("A", SPLITTED_HEADERS_LINE, 89, HEADERS, "Email"),
-      expectedOutput
-    );
+    deepEqual(actual, expected);
+  });
+
+  it("should add header in headers for false, false, true", function() {
+    const actual = pushHeader(false, false, true, HEADERS.slice(), "SALARY");
+
+    let expectedHeaders = HEADERS.slice();
+    expectedHeaders.push("SALARY");
+    const expected = {
+      header: ES,
+      headers: expectedHeaders
+    };
+
+    deepEqual(actual, expected);
+  });
+
+  it("should not add header in headers for false, true, false", function() {
+    const actual = pushHeader(false, true, false, HEADERS, "Salary");
+
+    const expected = {
+      header: "Salary",
+      headers: HEADERS
+    };
+    deepEqual(actual, expected);
+  });
+
+  it("should add header in headers for false, true, true", function() {
+    const actual = pushHeader(false, true, true, HEADERS.slice(), "SALARY");
+
+    let expectedHeaders = HEADERS.slice();
+    expectedHeaders.push("SALARY");
+    const expected = {
+      header: "",
+      headers: expectedHeaders
+    };
+    deepEqual(actual, expected);
   });
 });
 
