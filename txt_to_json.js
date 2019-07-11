@@ -11,6 +11,4 @@ const main = function(filePath) {
   return finalResult;
 };
 
-// main("./app_test_data/data_file.txt");
-
 module.exports = main;

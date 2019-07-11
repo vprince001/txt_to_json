@@ -41,9 +41,9 @@ const addCharToHeader = function(char, header) {
   return header;
 };
 
-const getHeaders = function(headerLine) {
-  const splittedHeaderLine = headerLine.split(ES);
-  const headerLineLength = headerLine.length;
+const getHeaders = function(headersLine) {
+  const splittedHeaderLine = headersLine.split(ES);
+  const headerLineLength = headersLine.length;
   let headers = [];
   let header = ES;
 
@@ -61,21 +61,23 @@ const getHeaders = function(headerLine) {
   return headers;
 };
 
+const pushStartPoint = function(char, nextChar, startPoints, index) {
+  if (char == WS && nextChar != WS) startPoints.push(index + 1);
+  return startPoints;
+};
+
 const getStartPoints = function(splittedHeaderLine) {
   let startPoints = [0];
   splittedHeaderLine.forEach((char, index) => {
-    const isSpace = char == WS;
-    const nextIsNotSpace = splittedHeaderLine[index + 1] != WS;
-
-    if (isSpace && nextIsNotSpace) {
-      startPoints.push(index + 1);
-    }
+    const nextChar = splittedHeaderLine[index + 1];
+    startPoints = pushStartPoint(char, nextChar, startPoints, index);
   });
   return startPoints;
 };
 
 module.exports = {
   getStartPoints,
+  pushStartPoint,
   getHeaders,
   addCharToHeader,
   pushHeader,

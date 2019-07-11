@@ -1,15 +1,22 @@
 const WS = " ";
 const ES = "";
 const CR = "\r";
+const NL = "\n";
 
 const STRING_DATA =
-  "FIRST_NAME     LAST_NAME        NUMBER               EMAIL                        ADDRESS          " +
+  "FIRST_NAME     LAST_NAME        NUMBER               EMAIL                        ADDRESS                                  " +
   "\n" +
   "Debra          Burks            880012XXXX           debra.burks@yahoo.com        9273 Thome Ave., Orchard Park, NY - 14127" +
   "\n" +
-  "Kasha          Todd             NULL                 kasha.todd@yahoo.com         910, Vine Street, Campbell, CA - 95008";
+  "Kasha          Todd             NULL                 kasha.todd@yahoo.com         910, Vine Street, Campbell, CA - 95008" +
+  "\n" +
+  "\n";
 
 const SPLITTED_DATA = STRING_DATA.split("\n");
+
+const HEADERS_LINE = SPLITTED_DATA[0];
+
+const SPLITTED_HEADERS_LINE = HEADERS_LINE.split(ES);
 
 const LINE1 = SPLITTED_DATA[1];
 
@@ -40,6 +47,8 @@ module.exports = {
   ES,
   CR,
   SPLITTED_DATA,
+  HEADERS_LINE,
+  SPLITTED_HEADERS_LINE,
   LINE1,
   LINE2,
   START_POINTS,
