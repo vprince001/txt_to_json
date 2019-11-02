@@ -1,16 +1,21 @@
 const WS = " ";
 const ES = "";
 const CR = "\r";
-const NL = "\n";
 
 const STRING_DATA =
-  "FIRST_NAME     LAST_NAME        NUMBER               EMAIL                        ADDRESS                                  " +
-  "\n" +
-  "Debra          Burks            880012XXXX           debra.burks@yahoo.com        9273 Thome Ave., Orchard Park, NY - 14127" +
-  "\n" +
-  "Kasha          Todd             NULL                 kasha.todd@yahoo.com         910, Vine Street, Campbell, CA - 95008" +
-  "\n" +
-  "\n";
+  `FIRST_NAME     LAST_NAME        NUMBER               EMAIL                        ADDRESS                                  
+Debra          Burks            880012XXXX           debra.burks@yahoo.com        9273 Thome Ave., Orchard Park, NY - 14127
+Kasha          Todd             NULL                 kasha.todd@yahoo.com         910, Vine Street, Campbell, CA - 95008
+\n`;
+
+const DATA_IN_ARRAY =
+  ["FIRST_NAME     LAST_NAME        NUMBER               EMAIL                        ADDRESS                                  ",
+    "Debra          Burks            880012XXXX           debra.burks@yahoo.com        9273 Thome Ave., Orchard Park, NY - 14127",
+    "Kasha          Todd             NULL                 kasha.todd@yahoo.com         910, Vine Street, Campbell, CA - 95008",
+    "",
+    ""
+  ]
+
 
 const SPLITTED_DATA = STRING_DATA.split("\n");
 
@@ -42,10 +47,16 @@ const OBJ_FOR_LINE_2 = {
   ADDRESS: "910, Vine Street, Campbell, CA - 95008"
 };
 
+const fs = {
+  readFileSync: () => STRING_DATA
+}
+
 module.exports = {
   WS,
   ES,
   CR,
+  STRING_DATA,
+  DATA_IN_ARRAY,
   SPLITTED_DATA,
   HEADERS_LINE,
   SPLITTED_HEADERS_LINE,
@@ -54,5 +65,6 @@ module.exports = {
   START_POINTS,
   HEADERS,
   OBJ_FOR_LINE_1,
-  OBJ_FOR_LINE_2
+  OBJ_FOR_LINE_2,
+  fs
 };

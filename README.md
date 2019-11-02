@@ -2,7 +2,7 @@
 
 <div align="center">
 
-Reads a txt file having a table and returns an array of obects. In which each object consists of all headers as keys and there data as values.
+Reads a text file or data variable having a table and returns an array of obects. In which each object consists of all headers as keys and there data as values.
 
 </div>
 
@@ -18,9 +18,18 @@ npm i --save txt-file-to-json
 
 ### In module system
 
+Use `filePath` key to provide `TEXT data from file`.
+
 ```javascript
 const txtToJson = require("txt-file-to-json");
-const dataInJSON = txtToJson("./filePath.txt");
+const dataInJSON = txtToJSON({ filePath: "./filePath.txt" });
+```
+
+Use `data` key to provide `TEXT data from variable or directly`.
+
+```javascript
+const txtToJSON = require("txt-file-to-json");
+const dataInJSON = txtToJSON({ data: someTEXTData });
 ```
 
 #### Sample input (txt data) :

@@ -1,9 +1,9 @@
 const fs = require("fs");
-const { NL, ES, FORMAT } = require("./src/constants");
-const { getStartPoints, getHeaders, formatDataInArray } = require("./src/lib");
+const { ES } = require("./src/constants");
+const { getStartPoints, getHeaders, formatDataInArray, getData } = require("./src/lib");
 
-const main = function(filePath) {
-  const data = fs.readFileSync(filePath, FORMAT).split(NL);
+const main = function (params) {
+  const data = getData(params, fs);
   const splittedHeaderLine = data[0].split(ES);
   const startPoints = getStartPoints(splittedHeaderLine);
   const headers = getHeaders(data[0]);

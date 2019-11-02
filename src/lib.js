@@ -1,17 +1,17 @@
-const { CR, WS, ES, NL } = require("./constants");
+const { CR, WS, ES, NL, FORMAT } = require("./constants");
 
-const getTrimmedValue = function(line, startPoints, index) {
+const getTrimmedValue = function (line, startPoints, index) {
   return line.substring(startPoints[index], startPoints[index + 1]).trim();
 };
 
-const getObject = function(line, headers, startPoints) {
-  return headers.reduce(function(acc, currentElement, index) {
+const getObject = function (line, headers, startPoints) {
+  return headers.reduce(function (acc, currentElement, index) {
     acc[currentElement] = getTrimmedValue(line, startPoints, index);
     return acc;
   }, {});
 };
 
-const formatDataInArray = function(data, startPoints, headers) {
+const formatDataInArray = function (data, startPoints, headers) {
   let finalResult = [];
   data = data.slice(1);
 
@@ -24,7 +24,7 @@ const formatDataInArray = function(data, startPoints, headers) {
   return finalResult;
 };
 
-const pushHeader = function(isWS, isNextNotWS, isLastChar, headers, header) {
+const pushHeader = function (isWS, isNextNotWS, isLastChar, headers, header) {
   if ((isWS && isNextNotWS) || isLastChar) {
     if (header != "") {
       headers.push(header);
@@ -34,14 +34,14 @@ const pushHeader = function(isWS, isNextNotWS, isLastChar, headers, header) {
   return { headers, header };
 };
 
-const addCharToHeader = function(char, header) {
+const addCharToHeader = function (char, header) {
   if (char != WS && char != CR && char != NL) {
     header += char;
   }
   return header;
 };
 
-const getHeaders = function(headersLine) {
+const getHeaders = function (headersLine) {
   const splittedHeaderLine = headersLine.split(ES);
   const headerLineLength = headersLine.length;
   let headers = [];
@@ -61,12 +61,12 @@ const getHeaders = function(headersLine) {
   return headers;
 };
 
-const pushStartPoint = function(char, nextChar, startPoints, index) {
+const pushStartPoint = function (char, nextChar, startPoints, index) {
   if (char == WS && nextChar != WS) startPoints.push(index + 1);
   return startPoints;
 };
 
-const getStartPoints = function(splittedHeaderLine) {
+const getStartPoints = function (splittedHeaderLine) {
   let startPoints = [0];
   splittedHeaderLine.forEach((char, index) => {
     const nextChar = splittedHeaderLine[index + 1];
@@ -74,6 +74,12 @@ const getStartPoints = function(splittedHeaderLine) {
   });
   return startPoints;
 };
+
+const getData = function (params, fs) {
+  if (params.filePath != null)
+    return fs.readFileSync(params.filePath, FORMAT).split(NL);
+  return params.data.split(NL);
+}
 
 module.exports = {
   getStartPoints,
@@ -83,5 +89,6 @@ module.exports = {
   pushHeader,
   formatDataInArray,
   getObject,
-  getTrimmedValue
+  getTrimmedValue,
+  getData
 };
