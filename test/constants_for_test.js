@@ -5,13 +5,13 @@ const CR = "\r";
 const STRING_DATA =
   `FIRST_NAME     LAST_NAME        NUMBER               EMAIL                        ADDRESS                                  
 Debra          Burks            880012XXXX           debra.burks@yahoo.com        9273 Thome Ave., Orchard Park, NY - 14127
-Kasha          Todd             NULL                 kasha.todd@yahoo.com         910, Vine Street, Campbell, CA - 95008
+Kasha          Todd             null                 kasha.todd@yahoo.com         910, Vine Street, Campbell, CA - 95008
 \n`;
 
 const DATA_IN_ARRAY =
   ["FIRST_NAME     LAST_NAME        NUMBER               EMAIL                        ADDRESS                                  ",
     "Debra          Burks            880012XXXX           debra.burks@yahoo.com        9273 Thome Ave., Orchard Park, NY - 14127",
-    "Kasha          Todd             NULL                 kasha.todd@yahoo.com         910, Vine Street, Campbell, CA - 95008",
+    "Kasha          Todd             null                 kasha.todd@yahoo.com         910, Vine Street, Campbell, CA - 95008",
     "",
     ""
   ]
@@ -42,7 +42,7 @@ const OBJ_FOR_LINE_1 = {
 const OBJ_FOR_LINE_2 = {
   FIRST_NAME: "Kasha",
   LAST_NAME: "Todd",
-  NUMBER: "NULL",
+  NUMBER: null,
   EMAIL: "kasha.todd@yahoo.com",
   ADDRESS: "910, Vine Street, Campbell, CA - 95008"
 };

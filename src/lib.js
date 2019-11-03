@@ -6,7 +6,12 @@ const getTrimmedValue = function (line, startPoints, index) {
 
 const getObject = function (line, headers, startPoints) {
   return headers.reduce(function (acc, currentElement, index) {
-    acc[currentElement] = getTrimmedValue(line, startPoints, index);
+    let trimmedValue = getTrimmedValue(line, startPoints, index);
+
+    if (trimmedValue == "null") {
+      trimmedValue = null;
+    }
+    acc[currentElement] = trimmedValue;
     return acc;
   }, {});
 };

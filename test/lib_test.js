@@ -34,6 +34,7 @@ describe("getStartPoints", function () {
   it("should return an array of all startpoints", function () {
     const actual = getStartPoints(SPLITTED_HEADERS_LINE);
     const expected = START_POINTS;
+
     deepEqual(actual, expected);
   });
 });
@@ -43,24 +44,28 @@ describe("pushStartPoint", function () {
     const actual = pushStartPoint(WS, "S", START_POINTS.slice(), 135);
     const expected = START_POINTS.slice();
     expected.push(136);
+
     deepEqual(actual, expected);
   });
 
   it("should return given startpoints if char is not WS and nextChar is not WS", function () {
     const actual = pushStartPoint("S", "S", START_POINTS.slice(), 135);
     const expected = START_POINTS.slice();
+
     deepEqual(actual, expected);
   });
 
   it("should return given startpoints if char is not WS and nextChar is WS", function () {
     const actual = pushStartPoint("S", WS, START_POINTS.slice(), 135);
     const expected = START_POINTS.slice();
+
     deepEqual(actual, expected);
   });
 
   it("should return given startpoints if char is WS and nextChar is WS", function () {
     const actual = pushStartPoint(WS, WS, START_POINTS.slice(), 135);
     const expected = START_POINTS.slice();
+
     deepEqual(actual, expected);
   });
 });
@@ -69,6 +74,7 @@ describe("getHeaders", function () {
   it("should return an array of all the headers", function () {
     const actual = getHeaders(HEADERS_LINE);
     const expected = HEADERS;
+
     deepEqual(actual, expected);
   });
 });
@@ -132,6 +138,7 @@ describe("pushHeader", function () {
       header: "Salary",
       headers: HEADERS
     };
+
     deepEqual(actual, expected);
   });
 
@@ -142,6 +149,7 @@ describe("pushHeader", function () {
       header: "Salary",
       headers: HEADERS
     };
+
     deepEqual(actual, expected);
   });
 
@@ -165,6 +173,7 @@ describe("pushHeader", function () {
       header: "Salary",
       headers: HEADERS
     };
+
     deepEqual(actual, expected);
   });
 
@@ -177,6 +186,7 @@ describe("pushHeader", function () {
       header: "",
       headers: expectedHeaders
     };
+
     deepEqual(actual, expected);
   });
 
@@ -187,17 +197,17 @@ describe("pushHeader", function () {
       header: "",
       headers: HEADERS
     };
+
     deepEqual(actual, expected);
   });
 });
 
 describe("formatDataInArray", function () {
   it("should return an array of objects for every line and should ignore empty lines", function () {
-    const expectedOutput = [OBJ_FOR_LINE_1, OBJ_FOR_LINE_2];
-    deepEqual(
-      formatDataInArray(SPLITTED_DATA, START_POINTS, HEADERS),
-      expectedOutput
-    );
+    const expected = [OBJ_FOR_LINE_1, OBJ_FOR_LINE_2];
+    const actual = formatDataInArray(SPLITTED_DATA, START_POINTS, HEADERS);
+
+    deepEqual(actual, expected);
   });
 });
 
@@ -213,7 +223,7 @@ describe("getObject", function () {
   const expectedOutputForLine2 = {
     FIRST_NAME: "Kasha",
     LAST_NAME: "Todd",
-    NUMBER: "NULL",
+    NUMBER: null,
     EMAIL: "kasha.todd@yahoo.com",
     ADDRESS: "910, Vine Street, Campbell, CA - 95008"
   };

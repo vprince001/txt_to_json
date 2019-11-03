@@ -37,9 +37,9 @@ const dataInJSON = txtToJSON({ data: someTEXTData });
 ```
 FIRST_NAME     LAST_NAME        NUMBER               EMAIL                        ADDRESS
 Debra          Burks            880012XXXX           debra.burks@yahoo.com        9273 Thome Ave., Orchard Park, NY - 14127
-Kasha          Todd             NULL                 kasha.todd@yahoo.com         910, Vine Street, Campbell, CA - 95008
+Kasha          Todd             null                 kasha.todd@yahoo.com         910, Vine Street, Campbell, CA - 95008
 Tameka         Fisher           880111XXXX           tameka.fisher@yahoo.com      7693 Honey Creek St., Redondo Beach, CA - 90278
-Daryl          Spence           990015XXXX           NULL                         988 Pearl Lane!!! (Uniondale), NY - 11553
+Daryl          Spence           990015XXXX           null                         988 Pearl Lane!!! (Uniondale), NY - 11553
 Charolette     Rice             720012XXXX           charolette.rice@msn.com      107 ~ River Dr. `Sacramento`, "CA"      95820
 ```
 
@@ -57,7 +57,7 @@ Charolette     Rice             720012XXXX           charolette.rice@msn.com    
   {
     FIRST_NAME: 'Kasha',
     LAST_NAME: 'Todd',
-    NUMBER: 'NULL',
+    NUMBER: null,
     EMAIL: 'kasha.todd@yahoo.com',
     ADDRESS: '910, Vine Street, Campbell, CA - 95008'
   },
@@ -72,7 +72,7 @@ Charolette     Rice             720012XXXX           charolette.rice@msn.com    
     FIRST_NAME: 'Daryl',
     LAST_NAME: 'Spence',
     NUMBER: '990015XXXX',
-    EMAIL: 'NULL',
+    EMAIL: null,
     ADDRESS: '988 Pearl Lane!!! (Uniondale), NY - 11553'
   },
   {
