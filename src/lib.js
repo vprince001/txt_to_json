@@ -1,4 +1,4 @@
-const { CR, WS, ES, NL, FORMAT } = require("./constants");
+const { CR, WS, ES, NL, FORMAT, STRING, EMPTYDATAMSG, EMPTYDATAEXCEPTION, NOTASTRINGMSG, INVALIDDATAEXCEPTION, FILENOTFOUNDEXCEPTION } = require("./constants");
 
 const getTrimmedValue = function (line, startPoints, index) {
   return line.substring(startPoints[index], startPoints[index + 1]).trim();
@@ -80,11 +80,30 @@ const getStartPoints = function (splittedHeaderLine) {
   return startPoints;
 };
 
+const readFile = function (filePath, fs) {
+  if (fs.existsSync(filePath))
+    return fs.readFileSync(filePath, FORMAT).split(NL);
+  console.error(`ERROR -->> ${filePath} is not a valid path.`);
+  throw Error(FILENOTFOUNDEXCEPTION);
+};
+
+const readData = function (data) {
+  if(typeof data == STRING) {
+    if(data.length)
+      return data.split(NL);
+    console.error(EMPTYDATAMSG);
+    throw Error(EMPTYDATAEXCEPTION);
+  }
+  console.error(NOTASTRINGMSG);
+  throw Error(INVALIDDATAEXCEPTION);
+};
+
 const getData = function (params, fs) {
-  if (params.filePath != null)
-    return fs.readFileSync(params.filePath, FORMAT).split(NL);
-  return params.data.split(NL);
-}
+  if (params.filePath == null) {
+    return readData(params.data);
+  }
+  return readFile(params.filePath, fs);
+};
 
 module.exports = {
   getStartPoints,
@@ -95,5 +114,7 @@ module.exports = {
   formatDataInArray,
   getObject,
   getTrimmedValue,
+  readFile,
+  readData,
   getData
 };

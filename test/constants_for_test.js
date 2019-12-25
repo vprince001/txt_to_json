@@ -1,6 +1,8 @@
 const WS = " ";
 const ES = "";
 const CR = "\r";
+const FILEPATH = "./data.json";
+const WRONGFILEPATH = "./d.txt";
 
 const STRING_DATA =
   `FIRST_NAME     LAST_NAME        NUMBER               EMAIL                        ADDRESS                                  
@@ -14,7 +16,7 @@ const DATA_IN_ARRAY =
     "Kasha          Todd             null                 kasha.todd@yahoo.com         910, Vine Street, Campbell, CA - 95008",
     "",
     ""
-  ]
+  ];
 
 
 const SPLITTED_DATA = STRING_DATA.split("\n");
@@ -48,13 +50,16 @@ const OBJ_FOR_LINE_2 = {
 };
 
 const fs = {
-  readFileSync: () => STRING_DATA
-}
+  readFileSync: () => STRING_DATA,
+  existsSync: filePath => filePath == FILEPATH ? true : false
+};
 
 module.exports = {
   WS,
   ES,
   CR,
+  FILEPATH,
+  WRONGFILEPATH,
   STRING_DATA,
   DATA_IN_ARRAY,
   SPLITTED_DATA,

@@ -1,9 +1,12 @@
 const { equal, deepEqual } = require("assert");
+const { expect } = require('chai');
 
 const {
   WS,
   ES,
   CR,
+  FILEPATH,
+  WRONGFILEPATH,
   STRING_DATA,
   DATA_IN_ARRAY,
   SPLITTED_DATA,
@@ -27,6 +30,8 @@ const {
   formatDataInArray,
   getObject,
   getTrimmedValue,
+  readFile,
+  readData,
   getData
 } = require("../src/lib");
 
@@ -256,17 +261,40 @@ describe("getTrimmedValue", function () {
 });
 
 describe("getData", function () {
-  it("should return data in Array if filePath is given", function () {
-    const actual = getData({ filePath: "./data.json" }, fs);
+  it("should take data as string if filepath is not given", function () {
+    const actual = getData({ data: STRING_DATA });
+    const expected = DATA_IN_ARRAY;
+
+    deepEqual(actual, expected);
+  });
+});
+
+describe("readData", function () {
+  it("should return data in Array if data is a string", function () {
+    const actual = readData(STRING_DATA);
     const expected = DATA_IN_ARRAY;
 
     deepEqual(actual, expected);
   });
 
-  it("should return data in Array if TEXT data is given", function () {
-    const actual = getData({ data: STRING_DATA });
+  it("should throw an error if data is not a string", function () {
+    expect(() => readData(["someValues"])).to.throw();
+  });
+
+  it("should throw an error if data is an empty string", function () {
+    expect(() => readData(ES)).to.throw();
+  });
+});
+
+describe("readFile", function () {
+  it("should return data in Array if file exists", function () {
+    const actual = readFile(FILEPATH, fs);
     const expected = DATA_IN_ARRAY;
 
     deepEqual(actual, expected);
+  });
+
+  it("should throw an error if file does not exists", function () {
+    expect(() => getData({ filePath: WRONGFILEPATH }, fs)).to.throw();
   });
 });
