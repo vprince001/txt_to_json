@@ -32,7 +32,6 @@ const getObject = function (line, headers, startPoints) {
 
 const formatDataInArray = function (data, startPoints, headers) {
     let finalResult = [];
-    data = data.slice(1);
 
     data.forEach(line => {
         if (line == ES) {
@@ -124,6 +123,14 @@ const getData = function (params, fs) {
     }
 };
 
+const getRequiredData = function (params, data) {
+    let dataWithoutHeaders = data.slice(1);
+    if(params.noOfRecords) {
+        dataWithoutHeaders = dataWithoutHeaders.slice(0,params.noOfRecords);
+    }
+    return dataWithoutHeaders;
+}
+
 module.exports = {
     getStartPoints,
     pushStartPoint,
@@ -135,5 +142,6 @@ module.exports = {
     getTrimmedValue,
     readFile,
     readData,
-    getData
+    getData,
+    getRequiredData
 };

@@ -12,6 +12,8 @@ const {
     SPLITTED_DATA,
     HEADERS_LINE,
     SPLITTED_HEADERS_LINE,
+    SPLITTED_DATA_WITHOUT_HEADERS,
+    NO_OF_RECORDS_PARAM,
     LINE1,
     LINE2,
     START_POINTS,
@@ -28,6 +30,7 @@ const {
     addCharToHeader,
     pushHeader,
     formatDataInArray,
+    getRequiredData,
     getObject,
     getTrimmedValue,
     readFile,
@@ -210,11 +213,27 @@ describe("pushHeader", function () {
 describe("formatDataInArray", function () {
     it("should return an array of objects for every line and should ignore empty lines", function () {
         const expected = [OBJ_FOR_LINE_1, OBJ_FOR_LINE_2];
-        const actual = formatDataInArray(SPLITTED_DATA, START_POINTS, HEADERS);
+        const actual = formatDataInArray(SPLITTED_DATA_WITHOUT_HEADERS, START_POINTS, HEADERS);
 
         deepEqual(actual, expected);
     });
 });
+
+describe("getRequiredData",function(){
+    it("should return required number of records if passed in the params", function(){
+        const expected = SPLITTED_DATA_WITHOUT_HEADERS.slice(0,1);
+        const actual = getRequiredData(NO_OF_RECORDS_PARAM,SPLITTED_DATA);
+
+        deepEqual(actual, expected);
+    })
+
+    it("should return all the records if required number of records is not passed", function(){
+        const expected = SPLITTED_DATA_WITHOUT_HEADERS;
+        const actual = getRequiredData(new Object(),SPLITTED_DATA);
+
+        deepEqual(actual, expected);
+    })
+})
 
 describe("getObject", function () {
     const expectedOutputForLine1 = {
