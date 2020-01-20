@@ -12,6 +12,9 @@ const EMPTYDATAEXCEPTION = "EmptyDataException";
 const NOTASTRINGMSG = "ERROR -->> Provided data is not a String.";
 const INVALIDDATAEXCEPTION = "InvalidData";
 
+const NOTVALIDARGMSG = "ERROR -->> No valid argument provided.";
+const INVALIDARGUMENTEXCEPTION = "InvalidArgumentException";
+
 const FILENOTFOUNDEXCEPTION = "FileNotFoundException";
 
 module.exports = {
@@ -25,5 +28,7 @@ module.exports = {
     EMPTYDATAEXCEPTION,
     NOTASTRINGMSG,
     INVALIDDATAEXCEPTION,
-    FILENOTFOUNDEXCEPTION
+    FILENOTFOUNDEXCEPTION,
+    NOTVALIDARGMSG,
+    INVALIDARGUMENTEXCEPTION
 };

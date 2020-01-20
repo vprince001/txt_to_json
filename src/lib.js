@@ -9,7 +9,9 @@ const {
     EMPTYDATAEXCEPTION,
     NOTASTRINGMSG,
     INVALIDDATAEXCEPTION,
-    FILENOTFOUNDEXCEPTION
+    FILENOTFOUNDEXCEPTION,
+    NOTVALIDARGMSG,
+    INVALIDARGUMENTEXCEPTION
 } = require("./constants");
 
 const getTrimmedValue = function (line, startPoints, index) {
@@ -30,7 +32,6 @@ const getObject = function (line, headers, startPoints) {
 
 const formatDataInArray = function (data, startPoints, headers) {
     let finalResult = [];
-    data = data.slice(1);
 
     data.forEach(line => {
         if (line == ES) {
@@ -111,11 +112,24 @@ const readData = function (data) {
 };
 
 const getData = function (params, fs) {
-    if (params.filePath == null) {
+    if (params.filePath == null && params.data == null) {
+        console.error(NOTVALIDARGMSG);
+        throw Error(INVALIDARGUMENTEXCEPTION);
+    }
+    if (params.filePath) {
+        return readFile(params.filePath, fs);
+    } else {
         return readData(params.data);
     }
-    return readFile(params.filePath, fs);
 };
+
+const getRequiredData = function (params, data) {
+    let dataWithoutHeaders = data.slice(1);
+    if(params.noOfRecords) {
+        dataWithoutHeaders = dataWithoutHeaders.slice(0,params.noOfRecords);
+    }
+    return dataWithoutHeaders;
+}
 
 module.exports = {
     getStartPoints,
@@ -128,5 +142,6 @@ module.exports = {
     getTrimmedValue,
     readFile,
     readData,
-    getData
+    getData,
+    getRequiredData
 };
