@@ -9,7 +9,9 @@ const {
     EMPTYDATAEXCEPTION,
     NOTASTRINGMSG,
     INVALIDDATAEXCEPTION,
-    FILENOTFOUNDEXCEPTION
+    FILENOTFOUNDEXCEPTION,
+    NOTVALIDARGMSG,
+    INVALIDARGUMENTEXCEPTION
 } = require("./constants");
 
 const getTrimmedValue = function (line, startPoints, index) {
@@ -111,10 +113,15 @@ const readData = function (data) {
 };
 
 const getData = function (params, fs) {
-    if (params.filePath == null) {
+    if (params.filePath == null && params.data == null) {
+        console.error(NOTVALIDARGMSG);
+        throw Error(INVALIDARGUMENTEXCEPTION);
+    }
+    if (params.filePath) {
+        return readFile(params.filePath, fs);
+    } else {
         return readData(params.data);
     }
-    return readFile(params.filePath, fs);
 };
 
 module.exports = {

@@ -261,6 +261,10 @@ describe("getTrimmedValue", function () {
 });
 
 describe("getData", function () {
+    it("should throw an error if no valid argument is passed", function() {
+        expect(() => getData({})).to.throw();
+    });
+
     it("should take data as string if filepath is not given", function () {
         const actual = getData({data: STRING_DATA});
         const expected = DATA_IN_ARRAY;
