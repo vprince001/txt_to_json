@@ -84,3 +84,24 @@ Charolette     Rice             720012XXXX           charolette.rice@msn.com    
   }
 ]
 ```
+
+Use `noOfRecords` key along with `filePath` or `data` key to get data of `specific number of rows`.
+
+```javascript
+const txtToJson = require("txt-file-to-json");
+const dataInJSON = txtToJSON({ filePath: "./filePath.txt", noOfRecords: 1 });
+```
+
+#### Sample output when `noOfRecords` is `1` (json data) :
+
+```
+[
+  {
+    FIRST_NAME: 'Debra',
+    LAST_NAME: 'Burks',
+    NUMBER: '880012XXXX',
+    EMAIL: 'debra.burks@yahoo.com',
+    ADDRESS: '9273 Thome Ave., Orchard Park, NY - 14127'
+  }
+]
+```

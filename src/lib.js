@@ -125,7 +125,7 @@ const getData = function (params, fs) {
 
 const getRequiredData = function (params, data) {
     let dataWithoutHeaders = data.slice(1);
-    if(params.noOfRecords) {
+    if (params.noOfRecords || params.noOfRecords == 0) {
         dataWithoutHeaders = dataWithoutHeaders.slice(0,params.noOfRecords);
     }
     return dataWithoutHeaders;
