@@ -6,16 +6,16 @@ const FORMAT = "utf8";
 const STRING = "string";
 
 //messages
-const EMPTYDATAMSG = "ERROR -->> Provided data is empty.";
-const EMPTYDATAEXCEPTION = "EmptyDataException";
+const EMPTY_DATA_MSG = "ERROR -->> Provided data is empty.";
+const EMPTY_DATA_EXCEPTION = "EmptyDataException";
 
-const NOTASTRINGMSG = "ERROR -->> Provided data is not a String.";
-const INVALIDDATAEXCEPTION = "InvalidData";
+const NOT_A_STRING_MSG = "ERROR -->> Provided data is not a String.";
+const INVALID_DATA_EXCEPTION = "InvalidData";
 
-const NOTVALIDARGMSG = "ERROR -->> No valid argument provided.";
-const INVALIDARGUMENTEXCEPTION = "InvalidArgumentException";
+const NOT_VALID_ARG_MSG = "ERROR -->> No valid argument provided.";
+const INVALID_ARGUMENT_EXCEPTION = "InvalidArgumentException";
 
-const FILENOTFOUNDEXCEPTION = "FileNotFoundException";
+const FILE_NOT_FOUND_EXCEPTION = "FileNotFoundException";
 
 module.exports = {
     CR,
@@ -24,11 +24,11 @@ module.exports = {
     ES,
     FORMAT,
     STRING,
-    EMPTYDATAMSG,
-    EMPTYDATAEXCEPTION,
-    NOTASTRINGMSG,
-    INVALIDDATAEXCEPTION,
-    FILENOTFOUNDEXCEPTION,
-    NOTVALIDARGMSG,
-    INVALIDARGUMENTEXCEPTION
+    EMPTY_DATA_MSG,
+    EMPTY_DATA_EXCEPTION,
+    NOT_A_STRING_MSG,
+    INVALID_DATA_EXCEPTION,
+    FILE_NOT_FOUND_EXCEPTION,
+    NOT_VALID_ARG_MSG,
+    INVALID_ARGUMENT_EXCEPTION
 };

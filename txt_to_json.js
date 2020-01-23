@@ -8,8 +8,7 @@ const main = function (params) {
     const startPoints = getStartPoints(splittedHeaderLine);
     const headers = getHeaders(data[0]);
     const requiredData = getRequiredData(params, data);
-    const finalResult = formatDataInArray(requiredData, startPoints, headers);
-    return finalResult;
+    return formatDataInArray(requiredData, startPoints, headers);
 };
 
 module.exports = main;

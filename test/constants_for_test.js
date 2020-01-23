@@ -1,8 +1,8 @@
 const WS = " ";
 const ES = "";
 const CR = "\r";
-const FILEPATH = "./data.json";
-const WRONGFILEPATH = "./d.txt";
+const FILE_PATH = "./data.json";
+const WRONG_FILE_PATH = "./d.txt";
 
 const STRING_DATA =
     `FIRST_NAME     LAST_NAME        NUMBER               EMAIL                        ADDRESS                                  
@@ -27,9 +27,9 @@ const HEADERS_LINE = SPLITTED_DATA[0];
 
 const SPLITTED_HEADERS_LINE = HEADERS_LINE.split(ES);
 
-const LINE1 = SPLITTED_DATA[1];
+const LINE_1 = SPLITTED_DATA[1];
 
-const LINE2 = SPLITTED_DATA[2];
+const LINE_2 = SPLITTED_DATA[2];
 
 const START_POINTS = [0, 15, 32, 53, 82, 123];
 
@@ -55,15 +55,15 @@ const OBJ_FOR_LINE_2 = {
 
 const fs = {
     readFileSync: () => STRING_DATA,
-    existsSync: filePath => filePath == FILEPATH ? true : false
+    existsSync: filePath => filePath == FILE_PATH ? true : false
 };
 
 module.exports = {
     WS,
     ES,
     CR,
-    FILEPATH,
-    WRONGFILEPATH,
+    FILE_PATH,
+    WRONG_FILE_PATH,
     STRING_DATA,
     DATA_IN_ARRAY,
     SPLITTED_DATA,
@@ -71,8 +71,8 @@ module.exports = {
     HEADERS_LINE,
     NO_OF_RECORDS_PARAM,
     SPLITTED_HEADERS_LINE,
-    LINE1,
-    LINE2,
+    LINE_1,
+    LINE_2,
     START_POINTS,
     HEADERS,
     OBJ_FOR_LINE_1,

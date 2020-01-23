@@ -5,8 +5,8 @@ const {
     WS,
     ES,
     CR,
-    FILEPATH,
-    WRONGFILEPATH,
+    FILE_PATH,
+    WRONG_FILE_PATH,
     STRING_DATA,
     DATA_IN_ARRAY,
     SPLITTED_DATA,
@@ -14,8 +14,8 @@ const {
     SPLITTED_HEADERS_LINE,
     SPLITTED_DATA_WITHOUT_HEADERS,
     NO_OF_RECORDS_PARAM,
-    LINE1,
-    LINE2,
+    LINE_1,
+    LINE_2,
     START_POINTS,
     HEADERS,
     OBJ_FOR_LINE_1,
@@ -222,18 +222,18 @@ describe("formatDataInArray", function () {
 describe("getRequiredData",function(){
     it("should return required number of records if passed in the params", function(){
         const expected = SPLITTED_DATA_WITHOUT_HEADERS.slice(0,1);
-        const actual = getRequiredData(NO_OF_RECORDS_PARAM,SPLITTED_DATA);
+        const actual = getRequiredData(NO_OF_RECORDS_PARAM, SPLITTED_DATA);
 
         deepEqual(actual, expected);
-    })
+    });
 
     it("should return all the records if required number of records is not passed", function(){
         const expected = SPLITTED_DATA_WITHOUT_HEADERS;
-        const actual = getRequiredData(new Object(),SPLITTED_DATA);
+        const actual = getRequiredData({}, SPLITTED_DATA);
 
         deepEqual(actual, expected);
     })
-})
+});
 
 describe("getObject", function () {
     const expectedOutputForLine1 = {
@@ -253,29 +253,29 @@ describe("getObject", function () {
     };
 
     it("should return an object of headers and values given headers and a string of values", function () {
-        deepEqual(getObject(LINE1, HEADERS, START_POINTS), expectedOutputForLine1);
+        deepEqual(getObject(LINE_1, HEADERS, START_POINTS), expectedOutputForLine1);
     });
 
     it("should return an object of headers and values given headers and a string of different values", function () {
-        deepEqual(getObject(LINE2, HEADERS, START_POINTS), expectedOutputForLine2);
+        deepEqual(getObject(LINE_2, HEADERS, START_POINTS), expectedOutputForLine2);
     });
 });
 
 describe("getTrimmedValue", function () {
     it("should return first value from line after trimming", function () {
-        equal(getTrimmedValue(LINE1, START_POINTS, 0), "Debra");
+        equal(getTrimmedValue(LINE_1, START_POINTS, 0), "Debra");
     });
 
     it("should return second value from line after trimming", function () {
-        equal(getTrimmedValue(LINE2, START_POINTS, 1), "Todd");
+        equal(getTrimmedValue(LINE_2, START_POINTS, 1), "Todd");
     });
 
     it("should return third value from line after trimming", function () {
-        equal(getTrimmedValue(LINE1, START_POINTS, 2), "880012XXXX");
+        equal(getTrimmedValue(LINE_1, START_POINTS, 2), "880012XXXX");
     });
 
     it("should return fourth value from line after trimming", function () {
-        equal(getTrimmedValue(LINE2, START_POINTS, 3), "kasha.todd@yahoo.com");
+        equal(getTrimmedValue(LINE_2, START_POINTS, 3), "kasha.todd@yahoo.com");
     });
 });
 
@@ -311,13 +311,13 @@ describe("readData", function () {
 
 describe("readFile", function () {
     it("should return data in Array if file exists", function () {
-        const actual = readFile(FILEPATH, fs);
+        const actual = readFile(FILE_PATH, fs);
         const expected = DATA_IN_ARRAY;
 
         deepEqual(actual, expected);
     });
 
     it("should throw an error if file does not exists", function () {
-        expect(() => getData({filePath: WRONGFILEPATH}, fs)).to.throw();
+        expect(() => getData({filePath: WRONG_FILE_PATH}, fs)).to.throw();
     });
 });
