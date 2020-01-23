@@ -1,6 +1,6 @@
 {
   "name": "txt-file-to-json",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "Reads a txt file having a table and returns an array of obects. In which each object consists of all headers as keys and there data as values.",
   "main": "txt_to_json.js",
   "scripts": {
