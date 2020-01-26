@@ -55,7 +55,7 @@ const OBJ_FOR_LINE_2 = {
 
 const fs = {
     readFileSync: () => STRING_DATA,
-    existsSync: filePath => filePath == FILE_PATH ? true : false
+    existsSync: filePath => filePath === FILE_PATH
 };
 
 module.exports = {

@@ -116,7 +116,7 @@ const getData = function (params, fs) {
         console.error(NOT_VALID_ARG_MSG);
         throw Error(INVALID_ARGUMENT_EXCEPTION);
     }
-    if (params.filePath) {
+    if (params.filePath || params.filePath === ES) {
         return readFile(params.filePath, fs);
     } else {
         return readData(params.data);
