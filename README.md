@@ -21,21 +21,20 @@ npm i --save txt-file-to-json
 ### In module system
 
 Use `filePath` key to provide `TEXT data from file`.
-
 ```javascript
 const txtToJson = require("txt-file-to-json");
 const dataInJSON = txtToJSON({ filePath: "./filePath.txt" });
 ```
+<br>
 
 Use `data` key to provide `TEXT data from variable or directly`.
-
 ```javascript
 const txtToJSON = require("txt-file-to-json");
 const dataInJSON = txtToJSON({ data: someTEXTData });
 ```
+<br>
 
 #### Sample input (txt data) :
-
 ```
 FIRST_NAME     LAST_NAME        NUMBER               EMAIL                        ADDRESS
 Debra          Burks            880012XXXX           debra.burks@yahoo.com        9273 Thome Ave., `Orchard Park`, NY - 14127
@@ -44,7 +43,6 @@ Tameka         Fisher           880111XXXX           null                       
 ```
 
 #### Sample output (json data) :
-
 ```
 [
   {
@@ -70,16 +68,16 @@ Tameka         Fisher           880111XXXX           null                       
   }
 ]
 ```
+<br>
 
 Use `noOfRecords` key along with `filePath` or `data` key to get data of `specific number of rows`.
-
 ```javascript
 const txtToJson = require("txt-file-to-json");
 const dataInJSON = txtToJSON({ filePath: "./filePath.txt", noOfRecords: 1 });
 ```
+<br>
 
 #### Sample output when `noOfRecords` is `1` (json data) :
-
 ```
 [
   {
@@ -91,7 +89,8 @@ const dataInJSON = txtToJSON({ filePath: "./filePath.txt", noOfRecords: 1 });
   }
 ]
 ```
+<br>
 
 # References
-* To convert text and csv both to json. Try - "https://www.npmjs.com/package/data-to-json"
-* To convert only csv data to json. Try - "https://www.npmjs.com/package/csv-file-to-json"
+* To convert text and csv both to json. Try - https://www.npmjs.com/package/data-to-json
+* To convert only csv data to json. Try - https://www.npmjs.com/package/csv-file-to-json
