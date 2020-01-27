@@ -1,3 +1,5 @@
+<img src="./resources/txt_to_json.png" align="right" />
+
 <h1 align="center">txt-file-to-json</h1>
 
 <div align="center">
@@ -89,3 +91,7 @@ const dataInJSON = txtToJSON({ filePath: "./filePath.txt", noOfRecords: 1 });
   }
 ]
 ```
+
+# References
+* To convert text and csv both to json. Try - "https://www.npmjs.com/package/data-to-json"
+* To convert only csv data to json. Try - "https://www.npmjs.com/package/csv-file-to-json"
