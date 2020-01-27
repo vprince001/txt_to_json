@@ -1,6 +1,6 @@
-<img src="./resources/txt_to_json.png" align="right" width="200" height="150"/>
-
-<h1 align="center">txt-file-to-json</h1>
+<p align="center">
+  <img src="./resources/txt_to_json.png" width="300" height="200"/>
+</p>
 
 <div align="center">
 
