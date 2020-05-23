@@ -25,7 +25,6 @@ const {
 
 const {
     getStartPoints,
-    pushStartPoint,
     getHeaders,
     addCharToHeader,
     pushHeader,
@@ -42,37 +41,6 @@ describe("getStartPoints", function () {
     it("should return an array of all startpoints", function () {
         const actual = getStartPoints(SPLITTED_HEADERS_LINE);
         const expected = START_POINTS;
-
-        deepEqual(actual, expected);
-    });
-});
-
-describe("pushStartPoint", function () {
-    it("should add 1 more than given index in startpoints if char is WS and nextChar is not WS", function () {
-        const actual = pushStartPoint(WS, "S", START_POINTS.slice(), 135);
-        const expected = START_POINTS.slice();
-        expected.push(136);
-
-        deepEqual(actual, expected);
-    });
-
-    it("should return given startpoints if char is not WS and nextChar is not WS", function () {
-        const actual = pushStartPoint("S", "S", START_POINTS.slice(), 135);
-        const expected = START_POINTS.slice();
-
-        deepEqual(actual, expected);
-    });
-
-    it("should return given startpoints if char is not WS and nextChar is WS", function () {
-        const actual = pushStartPoint("S", WS, START_POINTS.slice(), 135);
-        const expected = START_POINTS.slice();
-
-        deepEqual(actual, expected);
-    });
-
-    it("should return given startpoints if char is WS and nextChar is WS", function () {
-        const actual = pushStartPoint(WS, WS, START_POINTS.slice(), 135);
-        const expected = START_POINTS.slice();
 
         deepEqual(actual, expected);
     });
