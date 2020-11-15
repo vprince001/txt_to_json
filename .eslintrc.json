@@ -1,6 +1,8 @@
 {
     "env": {
         "es2021": true,
+        "commonjs": true,
+        "mocha": true,
         "node": true
     },
     "extends": "eslint:recommended",
@@ -15,6 +17,6 @@
         "semi": ["error", "always"],
         "no-multiple-empty-lines": ["error", { "max": 1, "maxEOF": 1 }],
         "no-unused-vars": ["error", { "vars": "all", "args": "all", "ignoreRestSiblings": true }],
-        "max-len": "error"
+        "max-len": ["error", {"code":  120}]
     }
 }

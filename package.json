@@ -4,7 +4,9 @@
   "description": "Reads a txt file having a table and returns an array of obects. In which each object consists of all headers as keys and there data as values.",
   "main": "txt_to_json.js",
   "scripts": {
-    "test": "nyc --reporter=text mocha"
+    "style": "eslint ./",
+    "test": "nyc --reporter=text mocha",
+    "validate": "npm test && npm run style"
   },
   "repository": {
     "type": "git",

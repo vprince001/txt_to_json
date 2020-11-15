@@ -8,9 +8,7 @@ const main = function (params) {
   const startPoints = getStartPoints(splittedHeaderLine);
   const headers = getHeaders(data[0]);
   const requiredData = getRequiredData(params, data);
-  const result = formatDataInArray(requiredData, startPoints, headers);
-  console.log(result);
+  return formatDataInArray(requiredData, startPoints, headers);
 };
 
-main({filePath: './app_test_data/data.txt'});
-// module.exports = main;
+module.exports = main;
